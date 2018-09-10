@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run nongod/docker-react npm run test -- --coverage
+
+depoly:
+  - provide: "elasticbeanstalk"
+  - region: "ap-northeast-2"
+  - app: "docker-react"
+  - env: "Docker-env"
+  - bucket_name: ""
+  - bucket_path: ""
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
